@@ -41,7 +41,7 @@ main()
 		if (isPrimeBTD(num))
 			printf("%jd is prime\n", num);
 		else
-			printf("%jd is not prime\n", num);
+			printf("%jd is composite\n", num);
 
 		num++;
 	}
