@@ -16,6 +16,9 @@
 bool 
 isPrimeBTD(uint64_t n)
 {
+	if (n == 2)
+		return true;
+
 	if (!(n % 2) || n < 2)
 		return false;
 
