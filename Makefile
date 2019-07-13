@@ -1,4 +1,4 @@
-CC	= gcc
+CC	= tcc
 
 SRC	= $(wildcard *.c)
 OBJ	= $(SRC:.c=.o)
