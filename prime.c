@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 #include <math.h>
 
 /*
@@ -31,12 +32,13 @@ isPrimeBTD(uint64_t n)
 	return true;
 }
 
-int
-main()
+void
+listPrimes()
 {
+
 	uint64_t num = 1;
 
-	while (num <= UINT64_MAX)
+	while (num <= 100 && num <= UINT64_MAX)
 	{
 		if (isPrimeBTD(num))
 			printf("%jd is prime\n", num);
@@ -45,5 +47,14 @@ main()
 
 		num++;
 	}
+}
+
+int
+main(int argc, char **argv)
+{
+	if (argc == 2 && !strcmp("-v", argv[1]))
+		printf("version 0.1\n");
+	else
+		listPrimes();
 	return 0;
 }
