@@ -9,6 +9,9 @@
 #include <string.h>
 #include <math.h>
 
+uint64_t tnum, snum;
+float version = 0.1;
+
 /*
  * Basic Trial Division
  * Ideally replaced by an AKS primality test
@@ -35,26 +38,28 @@ isPrimeBTD(uint64_t n)
 void
 listPrimes()
 {
+	uint64_t cnum = snum;
 
-	uint64_t num = 1;
-
-	while (num <= 100 && num <= UINT64_MAX)
+	while (cnum <= tnum && cnum <= UINT64_MAX)
 	{
-		if (isPrimeBTD(num))
-			printf("%jd is prime\n", num);
+		if (isPrimeBTD(cnum))
+			printf("%jd is prime\n", cnum);
 		else
-			printf("%jd is composite\n", num);
+			printf("%jd is composite\n", cnum);
 
-		num++;
+		cnum++;
 	}
 }
 
 int
 main(int argc, char **argv)
 {
-	if (argc == 2 && !strcmp("-v", argv[1]))
-		printf("version 0.1\n");
-	else
+	if (argc == 2 && !strcmp("-v", argv[1])) {
+		printf("prime %.1f\n", version);
+	} else {
+		snum = 1;
+		tnum = 100;
 		listPrimes();
+	}
 	return 0;
 }
