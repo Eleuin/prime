@@ -9,8 +9,9 @@
 #include <string.h>
 #include <math.h>
 
-uint64_t tnum, snum;
-float version = 0.1;
+static uint64_t starting_number;
+static uint64_t ending_number;
+static float version = 0.1;
 
 /*
  * Basic Trial Division
@@ -18,17 +19,17 @@ float version = 0.1;
  * Inefficient for large numbers but simple
  */
 bool 
-isPrimeBTD(uint64_t n)
+isPrimeBTD(uint64_t number)
 {
-	if (n == 2)
+	if (number == 2)
 		return true;
 
-	if (!(n % 2) || n < 2)
+	if (!(number % 2) || number < 2)
 		return false;
 
-	for (uint64_t i = 3; i <= sqrtl(n); i++)
+	for (uint64_t integer = 3; integer <= sqrtl(number); integer++)
 	{
-		if (!(n % i))
+		if (!(number % integer))
 			return false;
 	}
 
@@ -38,27 +39,28 @@ isPrimeBTD(uint64_t n)
 void
 listPrimes()
 {
-	uint64_t cnum = snum;
+	uint64_t current_number = starting_number;
 
-	while (cnum <= tnum && cnum <= UINT64_MAX)
+	while (current_number <= ending_number && current_number <= UINT64_MAX)
 	{
-		if (isPrimeBTD(cnum))
-			printf("%jd is prime\n", cnum);
+		if (isPrimeBTD(current_number))
+			printf("%jd is prime\n", current_number);
 		else
-			printf("%jd is composite\n", cnum);
+			printf("%jd is composite\n", current_number);
 
-		cnum++;
+		current_number++;
 	}
 }
 
 int
 main(int argc, char **argv)
 {
+	// do advanced option handling here
 	if (argc == 2 && !strcmp("-v", argv[1])) {
 		printf("prime %.1f\n", version);
 	} else {
-		snum = 1;
-		tnum = 100;
+		starting_number = 1;
+		ending_number = 100;
 		listPrimes();
 	}
 	return 0;
